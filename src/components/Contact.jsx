@@ -21,11 +21,28 @@ export default function Contact() {
     }
   }, [controls, inView]);
 
-  const onSubmit = (data) => {
-    console.log(data); // In a real app, you would send this data to your backend
+  const onSubmit = async (data) => {
     setIsSubmitted(true);
+
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSem384M2UJ4-5ZlbiZt56qrxSH_bPc3lEA7KzCNS-5DQb2Nog/formResponse";
+    const formData = new FormData();
+    formData.append("entry.772819076", data.name);
+    formData.append("entry.1978959833", data.email);
+    formData.append("entry.1248794284", data.subject);
+    formData.append("entry.1890145996", data.message);
+
+    try {
+      await fetch(formURL, {
+        method: "POST",
+        mode: "no-cors", 
+        body: formData
+      });
+      
+    } catch (error) {
     
-    // Reset the form after submission
+      console.error("Error!", error.message);
+    }
+
     setTimeout(() => {
       reset();
       setIsSubmitted(false);
@@ -72,8 +89,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">Email</p>
-                    <a href="mailto:contact@example.com" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
-                      contact@example.com
+                    <a href="mailto:tachamosuman@gmail.com" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                     tachamosuman@gmail.com
                     </a>
                   </div>
                 </div>
@@ -84,8 +101,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">Phone</p>
-                    <a href="tel:+1234567890" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
-                      +1 (234) 567-890
+                    <a href="tel:+977-9869131853" className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400">
+                      +977-9869131853
                     </a>
                   </div>
                 </div>
@@ -97,7 +114,7 @@ export default function Contact() {
                   <div>
                     <p className="text-sm font-medium text-gray-900 dark:text-white">Location</p>
                     <p className="text-gray-600 dark:text-gray-300">
-                      New York, NY, United States
+                      Bhaktapur, Nepal
                     </p>
                   </div>
                 </div>

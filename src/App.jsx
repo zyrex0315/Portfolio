@@ -27,7 +27,7 @@ export default function App() {
           <About />
           {/* <Projects />
           <Skills /> */}
-          {/* <Contact /> */}
+          <Contact />
         </main>
         <Footer />
         {/* Fixed decorative elements */}
