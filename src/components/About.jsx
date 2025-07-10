@@ -128,16 +128,13 @@ export default function About() {
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
-                    React & JavaScripts
+                    React & JavaScript
                   </li>
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
                     Responsive Web Design
                   </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
-                    UI/UX Design Principles
-                  </li>
+                 
                   
                 </ul>
               </motion.div>
@@ -156,10 +153,7 @@ export default function About() {
                     <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
                     VS Code & Modern IDEs
                   </li>
-                  <li className="flex items-center">
-                    <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
-                    Git & Version Control
-                  </li>
+                
                   <li className="flex items-center">
                     <span className="w-2 h-2 bg-indigo-600 dark:bg-indigo-400 rounded-full mr-2"></span>
                     Figma & Design Tools

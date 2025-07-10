@@ -1,13 +1,10 @@
 <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="grad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+    <linearGradient id="textGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
       <stop stop-color="#6366F1"/>
       <stop offset="1" stop-color="#3B82F6"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#60A5FA" flood-opacity="0.7"/>
-    </filter>
   </defs>
-  <rect width="64" height="64" rx="16" fill="url(#grad)"/>
-  <text x="50%" y="54%" text-anchor="middle" fill="#fff" font-family="'Orbitron', 'Segoe UI', 'Arial', sans-serif" font-size="36" font-weight="bold" dy=".3em" filter="url(#glow)" transform="skewX(-10)">S</text>
+  <text x="50%" y="48%" text-anchor="middle" fill="url(#textGrad)" font-family="'Orbitron', 'Segoe UI', 'Arial', sans-serif" font-size="44" font-weight="bold" dy=".3em" transform="skewX(-10)">S</text>
+  <circle cx="32" cy="50" r="4" fill="url(#textGrad)"/>
 </svg> 

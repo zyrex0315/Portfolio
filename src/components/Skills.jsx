@@ -60,79 +60,79 @@ export default function Skills() {
 
   // Education Data
   const educationData = [
-    {
-      degree: "Master of Computer Science",
-      institution: "Stanford University",
-      location: "Stanford, CA",
-      period: "2020 - 2022",
-      description: "Specialized in Human-Computer Interaction and Frontend Engineering. Graduated with honors and completed a thesis on responsive design patterns for modern web applications.",
-      courses: ["Advanced Web Development", "Human-Computer Interaction", "UI/UX Research Methods", "Frontend Architecture"],
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Stanford_University_seal_2003.svg/1200px-Stanford_University_seal_2003.svg.png"
-    },
-    {
-      degree: "Bachelor of Science in Computer Science",
-      institution: "University of California, Berkeley",
-      location: "Berkeley, CA",
-      period: "2016 - 2020",
-      description: "Focused on software engineering fundamentals and web technologies. Participated in multiple hackathons and led the Web Development Club.",
-      courses: ["Data Structures", "Algorithms", "Web Programming", "Software Engineering"],
-      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Seal_of_University_of_California%2C_Berkeley.svg/1200px-Seal_of_University_of_California%2C_Berkeley.svg.png"
-    },
-    {
-      degree: "Frontend Development Certification",
-      institution: "Frontend Masters",
-      location: "Online",
-      period: "2019",
-      description: "Intensive frontend development program covering advanced JavaScript, React, and modern frontend workflows.",
-      courses: ["Advanced React Patterns", "State Management", "Performance Optimization"],
-      logo: "https://frontendmasters.com/static-assets/fm-meta-img.png"
-    }
+    // {
+    //   degree: "Master of Computer Science",
+    //   institution: "Stanford University",
+    //   location: "Stanford, CA",
+    //   period: "2020 - 2022",
+    //   description: "Specialized in Human-Computer Interaction and Frontend Engineering. Graduated with honors and completed a thesis on responsive design patterns for modern web applications.",
+    //   courses: ["Advanced Web Development", "Human-Computer Interaction", "UI/UX Research Methods", "Frontend Architecture"],
+    //   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Stanford_University_seal_2003.svg/1200px-Stanford_University_seal_2003.svg.png"
+    // },
+    // {
+    //   degree: "Bachelor of Science in Computer Science",
+    //   institution: "University of California, Berkeley",
+    //   location: "Berkeley, CA",
+    //   period: "2016 - 2020",
+    //   description: "Focused on software engineering fundamentals and web technologies. Participated in multiple hackathons and led the Web Development Club.",
+    //   courses: ["Data Structures", "Algorithms", "Web Programming", "Software Engineering"],
+    //   logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Seal_of_University_of_California%2C_Berkeley.svg/1200px-Seal_of_University_of_California%2C_Berkeley.svg.png"
+    // },
+    // {
+    //   degree: "Frontend Development Certification",
+    //   institution: "Frontend Masters",
+    //   location: "Online",
+    //   period: "2019",
+    //   description: "Intensive frontend development program covering advanced JavaScript, React, and modern frontend workflows.",
+    //   courses: ["Advanced React Patterns", "State Management", "Performance Optimization"],
+    //   logo: "https://frontendmasters.com/static-assets/fm-meta-img.png"
+    // }
   ];
 
   // Experience Data
   const experienceData = [
-    {
-      position: "Senior Frontend Developer",
-      company: "TechCorp Solutions",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
-      description: "Lead the frontend development team in creating responsive, accessible web applications for enterprise clients. Established coding standards and mentored junior developers.",
-      achievements: [
-        "Reduced page load time by 40% through code optimization",
-        "Implemented component library used across 15+ projects",
-        "Led migration from legacy codebase to modern React architecture"
-      ],
-      technologies: ["React", "TypeScript", "GraphQL", "Tailwind CSS"],
-      logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
-    },
-    {
-      position: "Frontend Developer",
-      company: "Digital Innovations Inc.",
-      location: "Seattle, WA",
-      period: "2020 - 2022",
-      description: "Developed and maintained frontend applications for e-commerce clients. Collaborated with UX designers to implement responsive interfaces and optimize user flows.",
-      achievements: [
-        "Built 5 full-featured e-commerce frontends",
-        "Improved checkout conversion rate by 25%",
-        "Implemented A/B testing framework for UI components"
-      ],
-      technologies: ["JavaScript", "React", "Redux", "SCSS"],
-      logo: "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
-    },
-    {
-      position: "Frontend Development Intern",
-      company: "WebSolutions Co.",
-      location: "Remote",
-      period: "Summer 2019",
-      description: "Assisted in developing and testing web applications. Participated in daily stand-ups and contributed to the company's component library.",
-      achievements: [
-        "Developed 10+ reusable UI components",
-        "Fixed 30+ browser compatibility issues",
-        "Created interactive data visualization dashboard"
-      ],
-      technologies: ["HTML", "CSS", "JavaScript", "Vue.js"],
-      logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
-    }
+    // {
+    //   position: "Senior Frontend Developer",
+    //   company: "TechCorp Solutions",
+    //   location: "San Francisco, CA",
+    //   period: "2022 - Present",
+    //   description: "Lead the frontend development team in creating responsive, accessible web applications for enterprise clients. Established coding standards and mentored junior developers.",
+    //   achievements: [
+    //     "Reduced page load time by 40% through code optimization",
+    //     "Implemented component library used across 15+ projects",
+    //     "Led migration from legacy codebase to modern React architecture"
+    //   ],
+    //   technologies: ["React", "TypeScript", "GraphQL", "Tailwind CSS"],
+    //   logo: "https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2574&q=80"
+    // },
+    // {
+    //   position: "Frontend Developer",
+    //   company: "Digital Innovations Inc.",
+    //   location: "Seattle, WA",
+    //   period: "2020 - 2022",
+    //   description: "Developed and maintained frontend applications for e-commerce clients. Collaborated with UX designers to implement responsive interfaces and optimize user flows.",
+    //   achievements: [
+    //     "Built 5 full-featured e-commerce frontends",
+    //     "Improved checkout conversion rate by 25%",
+    //     "Implemented A/B testing framework for UI components"
+    //   ],
+    //   technologies: ["JavaScript", "React", "Redux", "SCSS"],
+    //   logo: "https://images.unsplash.com/photo-1661956602944-249bcd04b63f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
+    // },
+    // {
+    //   position: "Frontend Development Intern",
+    //   company: "WebSolutions Co.",
+    //   location: "Remote",
+    //   period: "Summer 2019",
+    //   description: "Assisted in developing and testing web applications. Participated in daily stand-ups and contributed to the company's component library.",
+    //   achievements: [
+    //     "Developed 10+ reusable UI components",
+    //     "Fixed 30+ browser compatibility issues",
+    //     "Created interactive data visualization dashboard"
+    //   ],
+    //   technologies: ["HTML", "CSS", "JavaScript", "Vue.js"],
+    //   logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2670&q=80"
+    // }
   ];
 
   const tabVariants = {
