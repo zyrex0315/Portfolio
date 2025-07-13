@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Code, House, Mail, Menu, Moon, Sun, User, X } from 'lucide-react';
+import { Code, House, Mail, Menu, Moon, Sun, User, X, Briefcase, Wrench } from 'lucide-react';
 
 const navLinks = [
   { name: 'Home', href: '#home', icon: <House size={16} /> },
   { name: 'About', href: '#about', icon: <User size={16} /> },
-  { name: 'Projects', href: '#projects', icon: <Code size={16} /> },
-  { name: 'Skills', href: '#skills', icon: <Code size={16} /> },
- 
+  // { name: 'Projects', href: '#projects', icon: <Briefcase size={16} /> },
+  // { name: 'Skills', href: '#skills', icon: <Code size={16} /> },
+  // { name: 'Services', href: '#services', icon: <Wrench size={16} /> },
   { name: 'Contact', href: '#contact', icon: <Mail size={16} /> },
 ];
 
@@ -22,6 +22,14 @@ export default function Header() {
 
   // Detect mobile view
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  // Set initial active link based on current scroll position
+  useEffect(() => {
+    const currentScrollY = window.scrollY;
+    if (currentScrollY < 100) {
+      setActiveLink('home');
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,24 +53,32 @@ export default function Header() {
       const sections = document.querySelectorAll('section[id]');
       let current = '';
       
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (currentScrollY >= sectionTop - 200) {
-          current = section.getAttribute('id');
-        }
-      });
-      
-      if (current && current !== activeLink) {
-        setActiveLink(current);
+      // If we're at the very top, set home as active
+      if (currentScrollY < 100) {
+        current = 'home';
+      } else {
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (currentScrollY >= sectionTop - 200) {
+            current = section.getAttribute('id');
+          }
+        });
       }
+      
+      setActiveLink(prevActiveLink => {
+        if (current && current !== prevActiveLink) {
+          return current;
+        }
+        return prevActiveLink;
+      });
     };
 
     document.addEventListener('scroll', handleScroll);
     return () => {
       document.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [lastScrollY, mobileMenuOpen, scrolled]);
 
   useEffect(() => {
     // Check initial dark mode preference

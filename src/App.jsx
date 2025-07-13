@@ -3,15 +3,16 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
+// import Projects from './components/Projects';
+// import Skills from './components/Skills';
 import About from './components/About';
+// import MyServices from '../dist/MyServices';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './index.css';
 
 export default function App() {
-  // Removed loading state and effect for instant render
+ 
   return (
     <>
       <motion.div
@@ -19,14 +20,16 @@ export default function App() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gray-50 dark:bg-[#0e0e13] text-gray-900 dark:text-gray-200 font-[Inter]"
+        className="relative min-h-screen bg-gray-50 dark:bg-[#0e0e13] text-gray-900 dark:text-gray-200 font-[Inter]"
       >
         <Header />
         <main>
           <Hero />
           <About />
-          {/* <Projects />
-          <Skills /> */}
+
+          {/* <Projects /> */}
+          {/* <Skills /> */}    
+          {/* <MyServices /> */}
           <Contact />
         </main>
         <Footer />

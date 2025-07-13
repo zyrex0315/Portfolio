@@ -37,13 +37,13 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center pt-20 bg-white dark:bg-[#0e0e13]" ref={containerRef}>
-      {/* Background decorative elements */}
+     
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-indigo-600/10 dark:bg-indigo-600/5 rounded-full filter blur-3xl"></div>
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-purple-600/10 dark:bg-purple-600/5 rounded-full filter blur-3xl"></div>
       </div>
       
-      {/* Grid pattern */}
+    
       <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-[0.03] pointer-events-none"></div>
       
       <motion.div style={{ y, opacity }} className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8 relative z-10">
@@ -143,7 +143,7 @@ export default function Hero() {
                   ))}
                 </div>
               </motion.div>
-              {/* Scroll indicator should be here, just below social links */}
+            
               <motion.div 
                 className="w-full flex flex-col items-center justify-center mt-6 sm:mt-10 lg:hidden"
                 initial={{ opacity: 0, y: -20 }}
@@ -171,7 +171,7 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <div className="relative w-56 h-56 xs:w-64 xs:h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              {/* Decorative very rounded squares (9rem) */}
+          
               <motion.div 
                 className="absolute -top-6 -left-6 w-full h-full rounded-full bg-indigo-600/10 dark:bg-indigo-600/20"
                 animate={{ 
@@ -208,7 +208,7 @@ export default function Hero() {
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.7 }}
                 />
-                {/* Decorative pattern */}
+
                 <div className="absolute inset-0 bg-grid-pattern opacity-10 mix-blend-overlay rounded-full"></div>
               </div>
             </div>
