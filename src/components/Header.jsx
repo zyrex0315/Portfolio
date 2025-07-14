@@ -7,7 +7,7 @@ const navLinks = [
   { name: 'Home', href: '#home', icon: <House size={16} /> },
   { name: 'About', href: '#about', icon: <User size={16} /> },
   // { name: 'Projects', href: '#projects', icon: <Briefcase size={16} /> },
-  // { name: 'Skills', href: '#skills', icon: <Code size={16} /> },
+  { name: 'Skills', href: '#skills', icon: <Code size={16} /> },
   // { name: 'Services', href: '#services', icon: <Wrench size={16} /> },
   { name: 'Contact', href: '#contact', icon: <Mail size={16} /> },
 ];

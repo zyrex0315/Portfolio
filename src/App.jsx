@@ -4,9 +4,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 // import Projects from './components/Projects';
-// import Skills from './components/Skills';
+import Skills from './components/Skills';
 import About from './components/About';
-// import MyServices from '../dist/MyServices';
+// import MyServices from './components//MyServices';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './index.css';
@@ -28,12 +28,12 @@ export default function App() {
           <About />
 
           {/* <Projects /> */}
-          {/* <Skills /> */}    
+          <Skills />    
           {/* <MyServices /> */}
           <Contact />
         </main>
         <Footer />
-        {/* Fixed decorative elements */}
+        
         <div className="fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-[-1]">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/10 dark:bg-indigo-600/5 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 dark:bg-purple-600/5 rounded-full filter blur-3xl"></div>

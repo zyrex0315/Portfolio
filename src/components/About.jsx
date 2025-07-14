@@ -36,7 +36,7 @@ export default function About() {
         </motion.div>
 
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-10 lg:gap-12 items-start">
-          {/* Portrait Image */}
+          {/* my photo */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -50 }}
@@ -56,15 +56,7 @@ export default function About() {
               <div className="absolute bottom-4 right-4 w-12 h-12 sm:w-20 sm:h-20 border-b-4 border-r-4 border-indigo-600 opacity-70"></div>
             </div>
             
-            {/* Experience badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-              animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.8, rotate: inView ? 0 : -5 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="absolute -bottom-6 -right-6 bg-white dark:bg-gray-800 rounded-full p-2 sm:p-4 shadow-xl border-4 border-indigo-100 dark:border-gray-700"
-            >
-              
-            </motion.div>
+           
           </motion.div>
 
           {/* Content */}
