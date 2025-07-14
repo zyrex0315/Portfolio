@@ -2,9 +2,11 @@ import React from "react";
 import { useEffect, useRef } from 'react';
 import { motion, useAnimation, useScroll, useTransform } from 'framer-motion';
 import meImage from '../assets/me.jpg';
+import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
 
 export default function Hero() {
   const containerRef = useRef(null);
+  const prefersReducedMotion = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -20,12 +22,12 @@ export default function Hero() {
       await controls.start({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5 }
+        transition: prefersReducedMotion ? { duration: 0 } : defaultTransition
       });
     };
     
     sequence();
-  }, [controls]);
+  }, [controls, prefersReducedMotion]);
 
   const scrollToProjects = () => {
     document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
@@ -52,12 +54,13 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={controls}
+              transition={prefersReducedMotion ? { duration: 0 } : defaultTransition}
             >
               <motion.span 
                 className="inline-block text-lg sm:text-xl md:text-2xl font-semibold text-indigo-600 dark:text-indigo-400 mb-2 tracking-wider uppercase"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.1 }}
               >
                 Hi, I'm Suman Tachamo
               </motion.span>
@@ -66,7 +69,7 @@ export default function Hero() {
                 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.2 }}
               >
                 Crafting Digital <span className="relative">
                   <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Experiences</span>
@@ -77,7 +80,7 @@ export default function Hero() {
                 className="mt-4 sm:mt-6 text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-xs sm:max-w-2xl"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.3 }}
               >
                 I create beautiful, responsive, and user-friendly web experiences with clean code and modern technologies that bring your vision to life.
               </motion.p>
@@ -86,13 +89,13 @@ export default function Hero() {
                 className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.4 }}
               >
                 <motion.button 
                   onClick={scrollToProjects}
                   className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl flex items-center justify-center"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+                  whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
                 >
                   <span>View My Work</span>
                   <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -103,8 +106,8 @@ export default function Hero() {
                 <motion.button 
                   onClick={scrollToContact}
                   className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-700 transition-colors duration-300 text-center shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={prefersReducedMotion ? {} : { scale: 1.05 }}
+                  whileTap={prefersReducedMotion ? {} : { scale: 0.95 }}
                 >
                   Contact Me
                 </motion.button>

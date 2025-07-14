@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -14,12 +15,15 @@ export default function Contact() {
     threshold: 0.1,
     triggerOnce: true
   });
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (inView) {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+  const transition = prefersReducedMotion ? { duration: 0 } : defaultTransition;
 
   const onSubmit = async (data) => {
     setIsSubmitted(true);
@@ -58,7 +62,7 @@ export default function Contact() {
           animate={controls}
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition }
           }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
@@ -75,7 +79,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
+              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
               className="bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-indigo-400/20 p-4 sm:p-6 h-full"
             >
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
@@ -157,7 +161,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
             className="lg:col-span-2"
           >
             <div className="bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-indigo-400/20 p-4 sm:p-6">
@@ -243,8 +247,8 @@ export default function Contact() {
                     type="submit"
                     className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl"
                     disabled={isSubmitted}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
+                    whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
                   >
                     {isSubmitted ? (
                       <>

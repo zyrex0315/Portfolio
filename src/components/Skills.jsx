@@ -4,6 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Briefcase, Calendar, Code, ExternalLink, GraduationCap, MapPin } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
+import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
 
 
 const tabList = [
@@ -21,7 +22,8 @@ export default function Skills() {
   
   const [activeTab, setActiveTab] = useState("skills");
   const [hoveredItem, setHoveredItem] = useState(null);
-  
+  const prefersReducedMotion = usePrefersReducedMotion();
+
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -134,9 +136,7 @@ export default function Skills() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      transition: prefersReducedMotion ? { staggerChildren: 0 } : { staggerChildren: 0.1 }
     }
   };
   
@@ -145,7 +145,7 @@ export default function Skills() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }
     }
   };
 
@@ -190,7 +190,7 @@ export default function Skills() {
           animate={controls}
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5 } }
           }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
@@ -217,7 +217,7 @@ export default function Skills() {
                   background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
                   boxShadow: '0 4px 24px 0 rgba(99,102,241,0.10)'
                 }}
-                transition={{ type: 'tween', ease: 'easeInOut', duration: 0.35 }}
+                transition={prefersReducedMotion ? { duration: 0 } : { type: 'tween', ease: 'easeInOut', duration: 0.35 }}
                 style={{ position: 'absolute' }}
               />
               {tabList.map((tab, i) => (
@@ -247,7 +247,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
           >
             <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-8">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
@@ -301,7 +301,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
           >
             <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-indigo-200 dark:border-indigo-400/20 divide-y divide-gray-200 dark:divide-indigo-400/10">
               {educationData.map((edu, idx) => (
@@ -328,7 +328,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.5 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
           >
             <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-purple-200 dark:border-purple-400/20 space-y-6">
               {experienceData.map((exp, idx) => (
