@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import meImg from '../assets/me.jpg';
-import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
+
 
 export default function About() {
   const controls = useAnimation();
@@ -11,7 +11,7 @@ export default function About() {
     threshold: 0.1,
     triggerOnce: true
   });
-  const prefersReducedMotion = usePrefersReducedMotion();
+  
 
   useEffect(() => {
     if (inView) {
@@ -19,7 +19,8 @@ export default function About() {
     }
   }, [controls, inView]);
 
-  const transition = prefersReducedMotion ? { duration: 0 } : defaultTransition;
+  
+  const transition = { duration: 0.5 };
 
   return (
     <section id="about" className="relative py-10 sm:py-16 md:py-24 bg-white dark:bg-[#0e0e13]">
@@ -40,12 +41,12 @@ export default function About() {
         </motion.div>
 
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-10 lg:gap-12 items-start">
-          {/* my photo */}
+        
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -50 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.7, delay: 0.2 }}
-            className="w-full lg:w-1/2 relative overflow-hidden rounded-lg"
+            transition={transition}
+            className="w-full lg:w-1/2 relative overflow-hidden rounded-lg will-change-transform"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg opacity-10 blur-2xl transform translate-x-4 -translate-y-4"></div>
             <div className="relative overflow-hidden rounded-lg border-8 border-white dark:border-gray-800 shadow-2xl max-w-xs mx-auto lg:max-w-none">
@@ -67,14 +68,14 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : 50 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.7, delay: 0.4 }}
-            className="w-full lg:w-1/2"
+            transition={transition}
+            className="w-full lg:w-1/2 will-change-transform"
           >
             <motion.h3 
               className="text-xl sm:text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.5 }}
+              transition={transition}
             >
               About Me
             </motion.h3>
@@ -83,7 +84,7 @@ export default function About() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.6 }}
+                transition={transition}
               >
                 I'm a frontend developer with knowledge of backend tools and strong skills in graphic design, allowing me to create both functional and visually appealing web experiences.
               </motion.p>
@@ -91,7 +92,7 @@ export default function About() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.7 }}
+                transition={transition}
               >
                 As a new developer, I'm eager to learn, grow, and take on new challenges to build my skills and experience in the field.
               </motion.p>
@@ -99,7 +100,7 @@ export default function About() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.8 }}
+                transition={transition}
               >
                 When I'm not coding, you can find me exploring new technologies, 
                 collaborating with fellow developers, or finding inspiration in the 
@@ -111,7 +112,7 @@ export default function About() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.9 }}
+                transition={transition}
               >
                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                   <span className="w-10 h-1 bg-indigo-600 mr-3"></span>
@@ -138,7 +139,7 @@ export default function About() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: inView ? 1 : 0, y: inView ? 0 : 20 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 1 }}
+                transition={transition}
               >
                 <h4 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
                   <span className="w-10 h-1 bg-indigo-600 mr-3"></span>

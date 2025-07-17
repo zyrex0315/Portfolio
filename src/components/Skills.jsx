@@ -4,7 +4,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Briefcase, Calendar, Code, ExternalLink, GraduationCap, MapPin } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
-import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
+
 
 
 const tabList = [
@@ -22,7 +22,7 @@ export default function Skills() {
   
   const [activeTab, setActiveTab] = useState("skills");
   const [hoveredItem, setHoveredItem] = useState(null);
-  const prefersReducedMotion = usePrefersReducedMotion();
+  // Removed: const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
     if (inView) {
@@ -136,16 +136,17 @@ export default function Skills() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: prefersReducedMotion ? { staggerChildren: 0 } : { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.12 }
     }
   };
   
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0, scale: 0.95 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }
+      scale: 1,
+      transition: { duration: 0.5, type: 'spring', bounce: 0.35 }
     }
   };
 
@@ -190,7 +191,7 @@ export default function Skills() {
           animate={controls}
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5 } }
+            visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
           }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
@@ -217,7 +218,7 @@ export default function Skills() {
                   background: 'linear-gradient(to right, #4f46e5, #7c3aed)',
                   boxShadow: '0 4px 24px 0 rgba(99,102,241,0.10)'
                 }}
-                transition={prefersReducedMotion ? { duration: 0 } : { type: 'tween', ease: 'easeInOut', duration: 0.35 }}
+                transition={{ duration: 0.35 }}
                 style={{ position: 'absolute' }}
               />
               {tabList.map((tab, i) => (
@@ -241,116 +242,146 @@ export default function Skills() {
         </div>
 
         {/* Skills Tab Content */}
-        {activeTab === "skills" && (
-          <motion.div
-            key="skills"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
-          >
-            <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                {technicalSkills.map((category, idx) => (
-                  <div
-                    key={category.category}
-                    className={
-                      `rounded-2xl p-4 sm:p-6 h-full flex flex-col bg-white dark:bg-gray-900/40 border ` +
-                      (idx === 0 ? 'border-pink-200 dark:border-pink-400/40' : idx === 1 ? 'border-indigo-200 dark:border-indigo-400/40' : 'border-purple-200 dark:border-purple-400/40')
-                    }
-                  >
-                    <div className={
-                      `text-base sm:text-lg font-bold mb-2 sm:mb-4 ` +
-                      (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
-                    }>
-                      {category.category}
+        <AnimatePresence mode="wait">
+          {activeTab === "skills" && (
+            <motion.div
+              key="skills"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                  {technicalSkills.map((category, idx) => (
+                    <div
+                      key={category.category}
+                      className={
+                        `rounded-2xl p-4 sm:p-6 h-full flex flex-col bg-white dark:bg-gray-900/40 border ` +
+                        (idx === 0 ? 'border-pink-200 dark:border-pink-400/40' : idx === 1 ? 'border-indigo-200 dark:border-indigo-400/40' : 'border-purple-200 dark:border-purple-400/40')
+                      }
+                    >
+                      <div className={
+                        `text-base sm:text-lg font-bold mb-2 sm:mb-4 ` +
+                        (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
+                      }>
+                        {category.category}
+                      </div>
+                      <div className="divide-y divide-gray-200 dark:divide-white/10">
+                        <motion.div
+                          variants={containerVariants}
+                          initial="hidden"
+                          animate="visible"
+                        >
+                          {category.skills.map((skill) => (
+                            <motion.div
+                              key={skill.name}
+                              variants={itemVariants}
+                              className="flex items-start gap-3 sm:gap-4 py-4 sm:py-5 first:pt-0 last:pb-0"
+                            >
+                              <div className={
+                                `w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl flex-shrink-0 mt-1 ` +
+                                (idx === 0 ? 'bg-pink-100 dark:bg-pink-600/10' : idx === 1 ? 'bg-indigo-100 dark:bg-indigo-600/10' : 'bg-purple-100 dark:bg-purple-600/10')
+                              }>
+                                <img src={skill.icon} alt={skill.name} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
+                              </div>
+                              <div className="flex-1">
+                                <div className="font-bold text-gray-900 dark:text-white text-sm sm:text-base">{skill.name}</div>
+                                <div className={
+                                  `text-xs sm:text-sm font-medium mt-1 ` +
+                                  (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
+                                }>
+                                  Proficiency Level
+                                </div>
+                                <div className="text-gray-700 dark:text-white/80 text-xs mt-2 mb-1">{skill.level}%</div>
+                              </div>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      </div>
                     </div>
-                    <div className="divide-y divide-gray-200 dark:divide-white/10">
-                      {category.skills.map((skill) => (
-                        <div key={skill.name} className="flex items-start gap-3 sm:gap-4 py-4 sm:py-5 first:pt-0 last:pb-0">
-                          <div className={
-                            `w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl flex-shrink-0 mt-1 ` +
-                            (idx === 0 ? 'bg-pink-100 dark:bg-pink-600/10' : idx === 1 ? 'bg-indigo-100 dark:bg-indigo-600/10' : 'bg-purple-100 dark:bg-purple-600/10')
-                          }>
-                            <img src={skill.icon} alt={skill.name} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="font-bold text-gray-900 dark:text-white text-sm sm:text-base">{skill.name}</div>
-                            <div className={
-                              `text-xs sm:text-sm font-medium mt-1 ` +
-                              (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
-                            }>
-                              Proficiency Level
-                            </div>
-                            <div className="text-gray-700 dark:text-white/80 text-xs mt-2 mb-1">{skill.level}%</div>
-                        </div>
-                        </div>
                     ))}
-                    </div>
                   </div>
+                </div>
+            </motion.div>
+          )}
+
+          {activeTab === "education" && (
+            <motion.div
+              key="education"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-indigo-200 dark:border-indigo-400/20 divide-y divide-gray-200 dark:divide-indigo-400/10">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {educationData.map((edu, idx) => (
+                    <motion.div
+                      key={edu.institution}
+                      variants={itemVariants}
+                      className="flex items-start gap-5 py-6 first:pt-0 last:pb-0"
+                    >
+                      <div className="w-14 h-14 flex items-center justify-center bg-indigo-100 dark:bg-indigo-600/10 rounded-xl flex-shrink-0 mt-1">
+                        <img src={edu.logo} alt={edu.institution} className="w-11 h-11 object-contain rounded-xl" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="font-bold text-gray-900 dark:text-white text-base">{edu.degree}</div>
+                        <div className="text-indigo-600 dark:text-indigo-400 text-sm font-medium mt-1">{edu.period}</div>
+                        <div className="text-indigo-500 dark:text-indigo-300 text-sm font-semibold mt-1">{edu.institution}</div>
+                        <div className="text-gray-700 dark:text-white/70 text-xs mt-2 mb-1">{edu.description}</div>
+                      </div>
+                    </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
 
-        {/* Education Tab Content */}
-        {activeTab === "education" && (
-          <motion.div
-            key="education"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
-          >
-            <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-indigo-200 dark:border-indigo-400/20 divide-y divide-gray-200 dark:divide-indigo-400/10">
-              {educationData.map((edu, idx) => (
-                <div key={edu.institution} className="flex items-start gap-5 py-6 first:pt-0 last:pb-0">
-                  <div className="w-14 h-14 flex items-center justify-center bg-indigo-100 dark:bg-indigo-600/10 rounded-xl flex-shrink-0 mt-1">
-                    <img src={edu.logo} alt={edu.institution} className="w-11 h-11 object-contain rounded-xl" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-bold text-gray-900 dark:text-white text-base">{edu.degree}</div>
-                    <div className="text-indigo-600 dark:text-indigo-400 text-sm font-medium mt-1">{edu.period}</div>
-                    <div className="text-indigo-500 dark:text-indigo-300 text-sm font-semibold mt-1">{edu.institution}</div>
-                    <div className="text-gray-700 dark:text-white/70 text-xs mt-2 mb-1">{edu.description}</div>
-                  </div>
-                </div>
-              ))}
-                </div>
-          </motion.div>
-        )}
-
-        {/* Experience Tab Content */}
-        {activeTab === "experience" && (
-          <motion.div
-            key="experience"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
-          >
-            <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-purple-200 dark:border-purple-400/20 space-y-6">
-              {experienceData.map((exp, idx) => (
-                <div key={exp.company} className="flex items-start gap-4 py-4">
-                  <span className="w-12 h-12 flex items-center justify-center bg-purple-100 dark:bg-purple-600/10 rounded-lg flex-shrink-0 mt-1">
-                    <img src={exp.logo} alt={exp.company} className="w-9 h-9 object-cover rounded-lg" />
-                  </span>
-                  <div className="flex-1">
-                    <div className="font-bold text-gray-900 dark:text-white text-base">{exp.position}</div>
-                    <div className="text-purple-600 dark:text-purple-400 text-sm font-medium">{exp.company} &middot; {exp.period}</div>
-                    <div className="text-gray-700 dark:text-white/70 text-xs mt-2 mb-1">{exp.description}</div>
-                    <ul className="text-gray-700 dark:text-white/70 text-xs mt-1 list-disc list-inside space-y-1">
-                      {exp.achievements.slice(0,2).map((ach, i) => (
-                        <li key={i}>{ach}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      ))}
-    </div>
-  </motion.div>
-)}
+          {activeTab === "experience" && (
+            <motion.div
+              key="experience"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="max-w-2xl mx-auto bg-white dark:bg-gray-900/40 rounded-2xl p-6 md:p-10 border border-purple-200 dark:border-purple-400/20 space-y-6">
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  {experienceData.map((exp, idx) => (
+                    <motion.div
+                      key={exp.company}
+                      variants={itemVariants}
+                      className="flex items-start gap-4 py-4"
+                    >
+                      <span className="w-12 h-12 flex items-center justify-center bg-purple-100 dark:bg-purple-600/10 rounded-lg flex-shrink-0 mt-1">
+                        <img src={exp.logo} alt={exp.company} className="w-9 h-9 object-cover rounded-lg" />
+                      </span>
+                      <div className="flex-1">
+                        <div className="font-bold text-gray-900 dark:text-white text-base">{exp.position}</div>
+                        <div className="text-purple-600 dark:text-purple-400 text-sm font-medium">{exp.company} &middot; {exp.period}</div>
+                        <div className="text-gray-700 dark:text-white/70 text-xs mt-2 mb-1">{exp.description}</div>
+                        <ul className="text-gray-700 dark:text-white/70 text-xs mt-1 list-disc list-inside space-y-1">
+                          {exp.achievements.slice(0,2).map((ach, i) => (
+                            <li key={i}>{ach}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );

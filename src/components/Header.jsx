@@ -2,14 +2,14 @@ import React from "react";
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Code, House, Mail, Menu, Moon, Sun, User, X, Briefcase, Wrench } from 'lucide-react';
-import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
+
 
 const navLinks = [
   { name: 'Home', href: '#home', icon: <House size={16} /> },
   { name: 'About', href: '#about', icon: <User size={16} /> },
-  // { name: 'Projects', href: '#projects', icon: <Briefcase size={16} /> },
+  { name: 'Projects', href: '#projects', icon: <Briefcase size={16} /> },
   { name: 'Skills', href: '#skills', icon: <Code size={16} /> },
-  // { name: 'Services', href: '#services', icon: <Wrench size={16} /> },
+
   { name: 'Contact', href: '#contact', icon: <Mail size={16} /> },
 ];
 
@@ -20,7 +20,7 @@ export default function Header() {
   const [activeLink, setActiveLink] = useState('home');
   const [scrollDirection, setScrollDirection] = useState("none");
   const [lastScrollY, setLastScrollY] = useState(0);
-  const prefersReducedMotion = usePrefersReducedMotion();
+ 
 
   // Detect mobile view
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
@@ -55,7 +55,7 @@ export default function Header() {
       const sections = document.querySelectorAll('section[id]');
       let current = '';
       
-      // If we're at the very top, set home as active
+      
       if (currentScrollY < 100) {
         current = 'home';
       } else {
@@ -83,7 +83,7 @@ export default function Header() {
   }, [lastScrollY, mobileMenuOpen, scrolled]);
 
   useEffect(() => {
-    // Check initial dark mode preference
+   
     const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     setDarkMode(prefersDark);
     
@@ -102,7 +102,7 @@ export default function Header() {
     }
   }, [darkMode]);
 
-  // Lock body scroll when mobile menu is open
+
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.classList.add('overflow-hidden');
@@ -129,7 +129,7 @@ export default function Header() {
         scrolled ? 'bg-white/90 dark:bg-[#0e0e13]/90 backdrop-blur-md shadow-lg' : 'bg-transparent'
       } ${(!isMobile && scrollDirection === "down" && scrolled) ? "-translate-y-full" : "translate-y-0"}`}
       {...(!isMobile
-        ? { initial: { y: -100 }, animate: { y: 0 }, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.3 } }
+        ? { initial: { y: -100 }, animate: { y: 0 }, transition: { duration: 0.3 } }
         : {})}
     >
       <div className="container mx-auto px-0 sm:px-4 sm:px-6 lg:px-8 relative">
@@ -137,7 +137,7 @@ export default function Header() {
           <motion.div 
             className="flex-shrink-0"
             {...(!isMobile
-              ? { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 }, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5 } }
+              ? { initial: { opacity: 0, x: -20 }, animate: { opacity: 1, x: 0 }, transition: { duration: 0.5 } }
               : {})}
           >
             <a href="#home" className="text-base sm:text-lg md:text-xl font-bold relative group truncate max-w-[120px] xs:max-w-[90px] sm:max-w-none">
@@ -149,10 +149,10 @@ export default function Header() {
                 <motion.span 
                   className="absolute -top-1 -right-1 w-2 h-2 bg-indigo-600 rounded-full"
                   animate={{ 
-                    scale: prefersReducedMotion ? 1 : [1, 1.2, 1],
-                    opacity: prefersReducedMotion ? 1 : [0.7, 1, 0.7]
+                    scale: [1, 1.2, 1],
+                    opacity: [0.7, 1, 0.7]
                   }}
-                  transition={prefersReducedMotion ? { duration: 0 } : { duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                 ></motion.span>
               </span>
             </a>
@@ -162,7 +162,7 @@ export default function Header() {
           <motion.nav 
             className="hidden md:flex items-center"
             {...(!isMobile
-              ? { initial: { opacity: 0, y: -10 }, animate: { opacity: 1, y: 0 }, transition: prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 } }
+              ? { initial: { opacity: 0, y: -10 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.5, delay: 0.2 } }
               : {})}
           >
             <div className="relative bg-white/80 dark:bg-[#181926]/80 backdrop-blur-md rounded-full p-1.5 border border-gray-200 dark:border-gray-700 shadow-xl">
@@ -182,7 +182,7 @@ export default function Header() {
                       <motion.span
                         className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full -z-10"
                         layoutId="activeNavBackground"
-                        transition={prefersReducedMotion ? { duration: 0 } : { type: 'spring', duration: 0.6 }}
+                        transition={{ type: 'spring', duration: 0.6 }}
                       />
                     )}
                     {link.icon}
@@ -198,8 +198,8 @@ export default function Header() {
               onClick={toggleDarkMode}
               className="p-3 rounded-full bg-white dark:bg-gray-800 text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors shadow-md hover:shadow-lg"
               aria-label="Toggle dark mode"
-              whileHover={prefersReducedMotion ? {} : { scale: 1.1, rotate: 10 }}
-              whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
+              whileHover={{ scale: 1.1, rotate: 10 }}
+              whileTap={{ scale: 0.9 }}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {darkMode ? (
@@ -208,7 +208,7 @@ export default function Header() {
                     initial={{ opacity: 0, rotate: 90 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: -90 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <Sun size={20} />
                   </motion.div>
@@ -218,7 +218,7 @@ export default function Header() {
                     initial={{ opacity: 0, rotate: -90 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: 90 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.3 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <Moon size={20} />
                   </motion.div>
@@ -233,8 +233,8 @@ export default function Header() {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-nav"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              whileHover={prefersReducedMotion ? {} : { scale: 1.1 }}
-              whileTap={prefersReducedMotion ? {} : { scale: 0.9 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
             >
               <AnimatePresence mode="wait" initial={false}>
                 {mobileMenuOpen ? (
@@ -243,7 +243,7 @@ export default function Header() {
                     initial={{ opacity: 0, rotate: 90 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: -90 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <X size={20} />
                   </motion.div>
@@ -253,7 +253,7 @@ export default function Header() {
                     initial={{ opacity: 0, rotate: -90 }}
                     animate={{ opacity: 1, rotate: 0 }}
                     exit={{ opacity: 0, rotate: 90 }}
-                    transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2 }}
+                    transition={{ duration: 0.2 }}
                   >
                     <Menu size={20} />
                   </motion.div>
@@ -273,7 +273,7 @@ export default function Header() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.2 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="px-2 sm:px-4 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
@@ -287,7 +287,7 @@ export default function Header() {
                       section.scrollIntoView({ behavior: 'smooth' });
                     }
                     setActiveLink(link.href.substring(1));
-                    setMobileMenuOpen(false); // Close immediately
+                    setMobileMenuOpen(false); 
                   }}
                   className={`flex items-center gap-3 px-6 py-5 rounded-lg text-base font-medium transition-all duration-200 relative overflow-hidden w-full text-left ${
                     activeLink === link.href.substring(1)

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Check, Mail, MapPin, Phone, Send } from 'lucide-react';
-import { defaultTransition, usePrefersReducedMotion } from '../animationConfig';
+
 
 export default function Contact() {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -15,7 +15,7 @@ export default function Contact() {
     threshold: 0.1,
     triggerOnce: true
   });
-  const prefersReducedMotion = usePrefersReducedMotion();
+  
 
   useEffect(() => {
     if (inView) {
@@ -23,7 +23,8 @@ export default function Contact() {
     }
   }, [controls, inView]);
 
-  const transition = prefersReducedMotion ? { duration: 0 } : defaultTransition;
+  
+  const transition = { duration: 0.3 };
 
   const onSubmit = async (data) => {
     setIsSubmitted(true);
@@ -79,7 +80,7 @@ export default function Contact() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+              transition={transition}
               className="bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-indigo-400/20 p-4 sm:p-6 h-full"
             >
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
@@ -161,7 +162,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
+            transition={transition}
             className="lg:col-span-2"
           >
             <div className="bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-indigo-400/20 p-4 sm:p-6">
@@ -247,8 +248,8 @@ export default function Contact() {
                     type="submit"
                     className="w-full flex items-center justify-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium rounded-lg transition-colors duration-300 shadow-lg hover:shadow-xl"
                     disabled={isSubmitted}
-                    whileHover={prefersReducedMotion ? {} : { scale: 1.02 }}
-                    whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
+                    whileHover={transition}
+                    whileTap={transition}
                   >
                     {isSubmitted ? (
                       <>
