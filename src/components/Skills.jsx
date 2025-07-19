@@ -22,8 +22,7 @@ export default function Skills() {
   
   const [activeTab, setActiveTab] = useState("skills");
   const [hoveredItem, setHoveredItem] = useState(null);
-  // Removed: const prefersReducedMotion = usePrefersReducedMotion();
-
+  
   useEffect(() => {
     if (inView) {
       controls.start("visible");
@@ -79,9 +78,8 @@ export default function Skills() {
       period: "2021 - Present",
       description: "Currently pursuing a comprehensive degree in computer and information systems, focusing on modern software development, database management, and information technology fundamentals.",
       courses: ["Programming Fundamentals", "Database Management", "Information Systems", "Web Development"],
-      logo: "https://scontent.fktm4-1.fna.fbcdn.net/v/t39.30808-6/274270926_378062577656666_5863086493208769457_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGnwo-UkhPhyjX5U6oQpv3__pUtoEsJ6fT-lS2gSwnp9PdiVkWuRNLmWuht3ENfgJnjl4_An5L6kq26QLbIgCDI&_nc_ohc=4dKhwlR4aF4Q7kNvwHm8DlF&_nc_oc=Adkj2bBDk0sqCBvhU2MxGwWvVR123dPHV-sq7sS1h_dsuHcy5MSbLaYyDSX8LHy58JU&_nc_zt=23&_nc_ht=scontent.fktm4-1.fna&_nc_gid=QYS9D5tnm0qVZqqgWfrvKw&oh=00_AfTP-qoFA3y0IQr1FAvXdm8QSFqLYHZ9JEa_BMvRmU_kGQ&oe=68792549"
-    },
- 
+      logo: "https://api.wdnexus.com/media/company/avatar/2023/08/25/Logo.png"
+    }
   ];
 
   // Experience Data
