@@ -34,27 +34,27 @@ export default function Skills() {
     { 
       category: "Frontend Development",
       skills: [
-        { name: "React", level: 72, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "JavaScript", level: 75, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-        { name: "HTML5", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-        { name: "WordPress", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" },
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+        { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+
       ]
     },
     {
       category: "Design & UI",
       skills: [
-        { name: "Tailwind CSS", level: 85, icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" },
-        { name: "Figma", level: 82, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-        { name: "Photoshop", level: 88, icon: "https://img.icons8.com/?size=100&id=NeNPFdj7MzXi&format=png&color=000000" },
+        { name: "Tailwind CSS", icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" },
+        { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+        { name: "Photoshop", icon: "https://img.icons8.com/?size=100&id=NeNPFdj7MzXi&format=png&color=000000" },
     
       ]
     },
     {
       category: "Tools & Workflow",
       skills: [
-        { name: "Git", level: 85, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-        { name: "VS Code", level: 90, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-        { name: "WordPress", level: 80, icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" },
+        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+        { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+        { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" },
       ]
     }
   ];
@@ -271,30 +271,23 @@ export default function Skills() {
                           initial="hidden"
                           animate="visible"
                         >
-                          {category.skills.map((skill) => (
-                            <motion.div
-                              key={skill.name}
-                              variants={itemVariants}
-                              className="flex items-start gap-3 sm:gap-4 py-4 sm:py-5 first:pt-0 last:pb-0"
-                            >
-                              <div className={
-                                `w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-xl flex-shrink-0 mt-1 ` +
-                                (idx === 0 ? 'bg-pink-100 dark:bg-pink-600/10' : idx === 1 ? 'bg-indigo-100 dark:bg-indigo-600/10' : 'bg-purple-100 dark:bg-purple-600/10')
-                              }>
-                                <img src={skill.icon} alt={skill.name} className="w-7 h-7 sm:w-8 sm:h-8 object-contain" />
-                              </div>
-                              <div className="flex-1">
-                                <div className="font-bold text-gray-900 dark:text-white text-sm sm:text-base">{skill.name}</div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+                            {category.skills.map((skill) => (
+                              <motion.div
+                                key={skill.name}
+                                variants={itemVariants}
+                                className="flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-800/40 rounded-xl p-3 sm:p-4 shadow-sm"
+                              >
                                 <div className={
-                                  `text-xs sm:text-sm font-medium mt-1 ` +
-                                  (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
+                                  `w-12 h-12 flex items-center justify-center rounded-xl mb-2 ` +
+                                  (idx === 0 ? 'bg-pink-100 dark:bg-pink-600/10' : idx === 1 ? 'bg-indigo-100 dark:bg-indigo-600/10' : 'bg-purple-100 dark:bg-purple-600/10')
                                 }>
-                                  Proficiency Level
+                                  <img src={skill.icon} alt={skill.name} className="w-8 h-8 object-contain" />
                                 </div>
-                                <div className="text-gray-700 dark:text-white/80 text-xs mt-2 mb-1">{skill.level}%</div>
-                              </div>
-                            </motion.div>
-                          ))}
+                                <div className="font-bold text-gray-900 dark:text-white text-xs sm:text-sm mt-1">{skill.name}</div>
+                              </motion.div>
+                            ))}
+                          </div>
                         </motion.div>
                       </div>
                     </div>
