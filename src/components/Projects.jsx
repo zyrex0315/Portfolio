@@ -8,7 +8,7 @@ const projects = [
   {
     id: 1,
     title: "Finance Tracking",
-    description: "A modern finance tracking app that helps users manage expenses, visualize spending trends with interactive charts, and set budget goals. Features include dark mode, real-time analytics, and intuitive dashboards for personal or business use.",
+    description: "A modern finance tracking app that helps users manage expenses, visualize spending trends with interactive charts, and set budget goals. ",
     image: "https://policy.un.org/sites/default/files/styles/16_9_lg/public/2023-04/finance.jpeg?h=60b6dc0b&itok=HZaK_Sxa",
     tags: ["React", "Tailwind CSS", "Javascript"],
     liveUrl: "https://zyrex0315.github.io/Finance-Tracking/",
@@ -29,7 +29,7 @@ const projects = [
   {
     id: 3,
     title: "Movie Search App",
-    description: "A movie searching application that utilizes the OMDb API to fetch and display movie information. Features include real-time search, detailed movie info, and a responsive UI for a seamless browsing experience.",
+    description: "A movie searching application that utilizes the OMDb API to fetch and display movie information. Features include real-time search, detailed movie info.",
     image: "https://images.unsplash.com/photo-1467987506553-8f3916508521?auto=format&fit=crop&w=800&q=80",
     tags: ["React", "OMDb API", "Tailwind CSS"],
     liveUrl: "https://zyrex0315.github.io/movie/",
