@@ -10,12 +10,19 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import './index.css';
+import ClickSpark from './components/ClickSpark';
 
 
 export default function App() {
   
   return (
-    <>
+    <ClickSpark
+      sparkColor="#fff"
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+    >
       <motion.div
         key="content"
         initial={{ opacity: 0 }}
@@ -41,7 +48,7 @@ export default function App() {
         {/* Scroll to top button */}
         <ScrollToTopButton />
       </motion.div>
-    </>
+    </ClickSpark>
   );
 }
 
