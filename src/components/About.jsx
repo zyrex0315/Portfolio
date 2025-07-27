@@ -1,8 +1,6 @@
 import React from "react";
 import { motion, useInView } from 'framer-motion';
-
-const meImg = "/src/assets/me.jpg";
-
+import meImg from '../assets/me.jpg';
 // Animation variants
 const containerVariants = {
   hidden: {},
