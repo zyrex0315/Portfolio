@@ -1,9 +1,53 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion, useAnimation, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import { motion, useAnimation, AnimatePresence, useInView } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Github, Star } from 'lucide-react';
 
 
+const GradientHighlightText = ({ children, delay = 0 }) => {
+  const [isHighlighted, setIsHighlighted] = React.useState(false);
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsHighlighted(true);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [delay]);
+
+  return (
+    <span className="relative inline-block">
+      <motion.span
+        className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent"
+        initial={{ opacity: 0, scale: 0.95, rotateZ: -5 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          rotateZ: 0,
+          backgroundPosition: ['0% 50%', '100% 50%', '200% 50%', '0% 50%'],
+          filter: [
+            'hue-rotate(0deg) brightness(1)',
+            'hue-rotate(10deg) brightness(1.1)',
+            'hue-rotate(-5deg) brightness(1.05)',
+            'hue-rotate(0deg) brightness(1)'
+          ]
+        }}
+        transition={{
+          duration: 0.8,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          backgroundPosition: { duration: 6, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }
+        }}
+        style={{
+          backgroundSize: '400% 400%',
+        }}
+      >
+        {children}
+      </motion.span>
+      
+      
+      
+    
+    </span>
+  );
+};
 const projects = [
   {
     id: 1,
@@ -40,9 +84,10 @@ const projects = [
 
 const ProjectCard = ({ project, index, fullView = false }) => {
   const controls = useAnimation();
-  const [ref, inView] = useInView({
+  const ref = useRef(null);
+  const inView = useInView(ref, {
     threshold: 0.1,
-    triggerOnce: true
+    once: true
   });
   
   const [isHovered, setIsHovered] = useState(false);
@@ -53,7 +98,7 @@ const ProjectCard = ({ project, index, fullView = false }) => {
     }
   }, [controls, inView]);
 
-  const transition = { duration: 0.5, delay: index * 0.1 };
+  const transition = { type: "spring", damping: 10, stiffness: 100, delay: index * 0.08 };
 
   return (
     <motion.div
@@ -61,10 +106,12 @@ const ProjectCard = ({ project, index, fullView = false }) => {
       initial="hidden"
       animate={controls}
       variants={{
-        hidden: { opacity: 0, y: 50 },
+        hidden: { opacity: 0, y: 60, scale: 0.9, rotateX: -10 },
         visible: { 
           opacity: 1, 
           y: 0,
+          scale: 1,
+          rotateX: 0,
           transition
         }
       }}
@@ -73,6 +120,11 @@ const ProjectCard = ({ project, index, fullView = false }) => {
       } transition-all duration-500 h-full group`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      whileHover={{ 
+        scale: 1.03,
+        boxShadow: "0 15px 30px rgba(0,0,0,0.2)" 
+      }}
+      style={{ perspective: 1000 }}
     >
       {/* Featured Tag */}
       {project.featured && (
@@ -116,9 +168,10 @@ const ProjectCard = ({ project, index, fullView = false }) => {
 
 export default function Projects() {
   const controls = useAnimation();
-  const [ref, inView] = useInView({
+  const ref = useRef(null);
+  const inView = useInView(ref, {
     threshold: 0.1,
-    triggerOnce: true
+    once: true
   });
   
   const [currentProject, setCurrentProject] = useState(0);
@@ -179,20 +232,23 @@ export default function Projects() {
           }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <motion.span 
-            className="inline-block text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 mb-2 tracking-wider uppercase"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.1 }}
+         
+          <motion.h2 
+            className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
+            initial={{ opacity: 0, scale: 0.9, rotateX: -15 }}
+            animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            My Work
-          </motion.span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
             Featured Projects
-          </h2>
-          <p className="mt-2 sm:mt-4 text-base sm:text-xl text-gray-600 dark:text-gray-300 max-w-xs sm:max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            className="mt-2 sm:mt-4 text-base sm:text-xl text-gray-600 dark:text-gray-300 max-w-xs sm:max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             A selection of my recent work, showcasing my skills and passion for creating exceptional user interfaces.
-          </p>
+          </motion.p>
         </motion.div>
         
         {/* Featured Project Showcase */}
@@ -209,11 +265,12 @@ export default function Projects() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentProject}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ opacity: 0, x: 50, scale: 0.9, rotateY: -10 }}
+                    animate={{ opacity: 1, x: 0, scale: 1, rotateY: 0 }}
+                    exit={{ opacity: 0, x: -50, scale: 0.9, rotateY: 10 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                     className="relative rounded-xl overflow-hidden shadow-2xl aspect-[16/9] bg-gray-100 dark:bg-gray-900"
+                    style={{ perspective: 1000 }}
                   >
                     <img 
                       src={featuredProjects[currentProject].image} 
@@ -249,10 +306,10 @@ export default function Projects() {
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentProject}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
+                    initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -30, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
                   >
                     <div className="bg-white dark:bg-[#0e0e13]/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
                       <span className="inline-block bg-indigo-100 dark:bg-indigo-900/50 text-indigo-800 dark:text-indigo-300 text-xs font-semibold px-2.5 py-1 rounded-full mb-2">

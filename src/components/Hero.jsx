@@ -106,21 +106,6 @@ const GradientHighlightText = ({ children, delay = 0 }) => {
         {children}
       </motion.span>
       
-      {/* Multi-layered glow effects */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 rounded-xl blur-xl"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: isHighlighted ? [0, 0.8, 0.4, 0.6] : 0,
-          scale: isHighlighted ? [0.8, 1.3, 1.1, 1.2] : 0.8,
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: [0.25, 0.46, 0.45, 0.94]
-        }}
-      />
       
       {/* Secondary glow layer */}
       <motion.div
@@ -256,7 +241,7 @@ export default function Hero() {
       {/* Animated background for dark mode */}
       {isDarkMode && (
         <motion.div 
-          className="absolute inset-0 z-0"
+         className="hidden lg:block absolute inset-0 z-0"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, ease: "easeOut" }}
@@ -267,7 +252,7 @@ export default function Hero() {
 
       {/* Enhanced bottom fade gradient */}
       <motion.div 
-        className="hidden dark:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0e0e13] via-[#0e0e13]/80 to-transparent z-10"
+        className="hidden lg:dark:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0e0e13] via-[#0e0e13]/80 to-transparent z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5, delay: 1 }}

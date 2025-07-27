@@ -19,118 +19,9 @@ const fadeUpVariant = {
   show: { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)', transition: { duration: 0.9, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
 
-// Typewriter effect component
-const TypewriterText = ({ text, delay = 0, className = "" }) => {
-  const [displayedText, setDisplayedText] = React.useState('');
-  const [currentIndex, setCurrentIndex] = React.useState(0);
-  
-  React.useEffect(() => {
-    if (currentIndex < text.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedText(prev => prev + text[currentIndex]);
-        setCurrentIndex(prev => prev + 1);
-      }, 80 + Math.random() * 40);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentIndex, text]);
 
-  React.useEffect(() => {
-    const startTimeout = setTimeout(() => {
-      setCurrentIndex(0);
-      setDisplayedText('');
-    }, delay);
-    return () => clearTimeout(startTimeout);
-  }, [delay]);
 
-  return (
-    <span className={className}>
-      {text.split('').map((char, index) => (
-        <motion.span
-          key={index}
-          initial={{ opacity: 0, y: 10, filter: 'blur(5px)' }}
-          animate={index < currentIndex ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-          transition={{ duration: 0.3, ease: "easeOut" }}
-          className="inline-block"
-        >
-          {char}
-        </motion.span>
-      ))}
-    </span>
-  );
-};
 
-// Enhanced gradient text component
-const GradientHighlightText = ({ children, delay = 0 }) => {
-  const [isHighlighted, setIsHighlighted] = React.useState(false);
-
-  React.useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsHighlighted(true);
-    }, delay);
-    return () => clearTimeout(timeout);
-  }, [delay]);
-
-  return (
-    <span className="relative inline-block">
-      <motion.span
-        className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent"
-        initial={{ opacity: 0, scale: 0.95, rotateZ: -5 }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          rotateZ: 0,
-          backgroundPosition: ['0% 50%', '100% 50%', '200% 50%', '0% 50%'],
-          filter: [
-            'hue-rotate(0deg) brightness(1)',
-            'hue-rotate(10deg) brightness(1.1)',
-            'hue-rotate(-5deg) brightness(1.05)',
-            'hue-rotate(0deg) brightness(1)'
-          ]
-        }}
-        transition={{
-          duration: 0.8,
-          ease: [0.25, 0.46, 0.45, 0.94],
-          backgroundPosition: { duration: 6, repeat: Infinity, ease: [0.4, 0, 0.6, 1] }
-        }}
-        style={{
-          backgroundSize: '400% 400%',
-        }}
-      >
-        {children}
-      </motion.span>
-      
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 rounded-xl blur-xl"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ 
-          opacity: isHighlighted ? [0, 0.8, 0.4, 0.6] : 0,
-          scale: isHighlighted ? [0.8, 1.3, 1.1, 1.2] : 0.8,
-        }}
-        transition={{ 
-          duration: 3,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: [0.25, 0.46, 0.45, 0.94]
-        }}
-      />
-      
-      <motion.div
-        className="absolute -bottom-3 left-0 right-0 h-1.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-full"
-        initial={{ scaleX: 0, opacity: 0, y: 5 }}
-        animate={{ 
-          scaleX: isHighlighted ? 1 : 0, 
-          opacity: isHighlighted ? [0, 1, 0.8, 1] : 0,
-          y: isHighlighted ? 0 : 5
-        }}
-        transition={{ 
-          duration: 1.2, 
-          delay: 0.3, 
-          ease: [0.68, -0.55, 0.265, 1.55]
-        }}
-      />
-    </span>
-  );
-};
 
 export default function About() {
   const ref = React.useRef(null);
@@ -150,23 +41,14 @@ export default function About() {
           className="text-center mb-8 sm:mb-12 md:mb-16"
           style={{ perspective: 1000 }}
         >
-          <motion.div
-            className="mb-4"
-            variants={fadeUpVariant}
-          >
-            <TypewriterText
-              text="Get to know me better"
-              delay={0}
-              className="inline-block text-sm sm:text-base font-semibold text-indigo-600 dark:text-indigo-400 tracking-wider uppercase mb-4"
-            />
-          </motion.div>
+          
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-5xl font-bold"
+          className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
             variants={fadeUpVariant}
           >
-            <GradientHighlightText delay={1000}>
+           
               About Me
-            </GradientHighlightText>
+            
           </motion.h2>
         </motion.div>
 
@@ -178,7 +60,7 @@ export default function About() {
           style={{ perspective: 1000 }}
         >
            {/* Image */}
-           <motion.div
+          <motion.div
             variants={fadeUpVariant}
             className="w-full lg:w-1/2 relative overflow-hidden rounded-lg will-change-transform"
           >
