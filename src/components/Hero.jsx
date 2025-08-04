@@ -392,7 +392,7 @@ export default function OptimizedHero() {
                               repeat: Infinity,
                               ease: "easeInOut"
                             }}
-                            className="bg-gradient-to-r from-indigo-600 via-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent"
+                            className="bg-gradient-to-r from-indigo-600 via-purple-600  to-indigo-600 bg-clip-text text-transparent"
                             style={{ backgroundSize: '300% 300%' }}
                           >
                             Experiences

@@ -16,7 +16,7 @@ const GradientHighlightText = ({ children, delay = 0 }) => {
   return (
     <span className="relative inline-block">
       <motion.span
-        className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent"
+        className="relative z-10 bg-gradient-to-r from-indigo-600 via-purple-600  to-indigo-600 bg-clip-text text-transparent"
         initial={{ opacity: 0, scale: 0.95, rotateZ: -5 }}
         animate={{
           opacity: 1,
@@ -221,7 +221,7 @@ export default function Projects() {
       </div>
     
       <div className="absolute inset-0 bg-grid-pattern opacity-5 dark:opacity-[0.03] pointer-events-none"></div>
-      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8 relative">
+      <div className="container mx-auto px-2 sm:px-6 lg:px-8 relative">
         <motion.div
           ref={ref}
           initial="hidden"
