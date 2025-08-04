@@ -77,9 +77,9 @@ export default function Background({
   hueShift = 0,
   noiseIntensity = 0,
   scanlineIntensity = 0,
-  speed = 1.2,
-  scanlineFrequency = 0.5,
-  warpAmount = 1,
+  speed = 2,
+  scanlineFrequency = 0,
+  warpAmount = 0.5,
   resolutionScale = 1,
 }) {
   const ref = useRef(null);
