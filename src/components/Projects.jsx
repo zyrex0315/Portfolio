@@ -87,7 +87,7 @@ const ProjectCard = ({ project, index, fullView = false }) => {
   const ref = useRef(null);
   const inView = useInView(ref, {
     threshold: 0.1,
-    once: true
+    once: false
   });
   
   const [isHovered, setIsHovered] = useState(false);
