@@ -213,7 +213,7 @@ export default function Skills() {
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-600/5 to-purple-600/5 dark:from-indigo-600/3 dark:to-purple-600/3 rounded-full filter blur-3xl" />
       </div>
     
-      <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-2  sm:px-6 lg:px-8 relative z-10">
         <motion.div
           ref={ref}
           initial="hidden"
