@@ -135,8 +135,8 @@ export default function MyContact() {
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
           <motion.h2 
-            variants={itemVariants}
-            className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white"
+             className="text-2xl sm:text-3xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-2 sm:mb-4"
+            
           >
             Get In Touch
           </motion.h2>

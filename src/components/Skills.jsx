@@ -5,71 +5,71 @@ import { Briefcase, Calendar, Code, ExternalLink, GraduationCap, MapPin, Sparkle
 import { AnimatePresence } from 'framer-motion';
 
 const tabList = [
-  { id: "skills", label: "Skills", icon: <Code className="w-5 h-5 mr-2" /> },
-  { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5 mr-2" /> },
-  { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5 mr-2" /> }
+  { id: "experience", label: "Experience", icon: <Briefcase className="w-5 h-5 mr-2" /> },
+  { id: "education", label: "Education", icon: <GraduationCap className="w-5 h-5 mr-2" /> }
 ];
 
-// Removed floating particle component for minimal design
-
-// Minimal Skill Card Component
-const SkillCard = ({ skill, index, categoryIndex, onHover }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const colors = [
-    { bg: 'bg-pink-100 dark:bg-pink-600/10', text: 'text-pink-600 dark:text-pink-400', border: 'border-pink-200 dark:border-pink-400/40' },
-    { bg: 'bg-indigo-100 dark:bg-indigo-600/10', text: 'text-indigo-600 dark:text-indigo-400', border: 'border-indigo-200 dark:border-indigo-400/40' },
-    { bg: 'bg-purple-100 dark:bg-purple-600/10', text: 'text-purple-600 dark:text-purple-400', border: 'border-purple-200 dark:border-purple-400/40' }
+// Horizontal Scrolling Skills Component
+const ScrollingSkills = React.memo(() => {
+  const skills = [
+    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+    { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+    { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+    { name: "Tailwind CSS", icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" },
+    { name: "MySQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
+    { name: "Photoshop", icon: "https://img.icons8.com/?size=100&id=NeNPFdj7MzXi&format=png&color=000000" },
+    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+    { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" }
   ];
 
-  const color = colors[categoryIndex] || colors[0];
+  // Duplicate skills for seamless loop
+  const duplicatedSkills = [...skills, ...skills, ...skills];
 
   return (
-    <motion.div
-      className={`relative flex flex-col items-center justify-center text-center bg-white/80 dark:bg-gray-800/60 rounded-xl p-4 sm:p-5 cursor-pointer backdrop-blur-sm ${color.border} border transition-all duration-300`}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ 
-        opacity: 1, 
-        y: 0,
-        transition: {
-          duration: 0.4,
-          delay: index * 0.1,
-        }
-      }}
-      whileHover={{ 
-        scale: 1.02,
-        y: -2,
-        transition: { duration: 0.2 }
-      }}
-      onMouseEnter={() => {
-        setIsHovered(true);
-        onHover?.(skill.name);
-      }}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        onHover?.(null);
-      }}
-    >
-      {/* Icon container */}
+    <div className="w-full overflow-hidden py-6 my-8">
       <motion.div
-        className={`w-12 h-12 flex items-center justify-center rounded-xl mb-3 ${color.bg}`}
-        whileHover={{ scale: 1.1 }}
-        transition={{ duration: 0.2 }}
+        className="flex space-x-6"
+        animate={{
+          x: [0, -50 * skills.length * 3]
+        }}
+        transition={{
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 30,
+            ease: "linear",
+          },
+        }}
       >
-        <img 
-          src={skill.icon} 
-          alt={skill.name} 
-          className="w-8 h-8 object-contain"
-        />
+        {duplicatedSkills.map((skill, index) => (
+          <motion.div
+            key={index}
+            className="flex items-center whitespace-nowrap px-6 py-4 min-w-max"
+            whileHover={{ 
+              scale: 1.05,
+              y: -2,
+              transition: { duration: 0.2 }
+            }}
+          >
+            <div className="w-8 h-8 mr-3 flex items-center justify-center">
+              <img 
+                src={skill.icon} 
+                alt={skill.name} 
+                className="w-8 h-8 object-contain"
+              />
+            </div>
+            <span className="text-gray-700 dark:text-gray-300 font-medium text-lg">
+              {skill.name}
+            </span>
+          </motion.div>
+        ))}
       </motion.div>
-
-      {/* Skill name */}
-      <div className={`font-medium text-sm ${color.text}`}>
-        {skill.name}
-      </div>
-    </motion.div>
+    </div>
   );
-};
+});
 
 export default function Skills() {
   const controls = useAnimation();
@@ -79,7 +79,7 @@ export default function Skills() {
     amount: 0.1
   });
   
-  const [activeTab, setActiveTab] = useState("skills");
+  const [activeTab, setActiveTab] = useState("experience");
   const [hoveredSkill, setHoveredSkill] = useState(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
@@ -98,34 +98,6 @@ export default function Skills() {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-
-  // Skills Data
-  const technicalSkills = [
-    { 
-      category: "Frontend Development",
-      skills: [
-        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
-        { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
-      ]
-    },
-    {
-      category: "Design & UI",
-      skills: [
-        { name: "Tailwind CSS", icon: "https://img.icons8.com/?size=100&id=CIAZz2CYc6Kc&format=png&color=000000" },
-        { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-        { name: "Photoshop", icon: "https://img.icons8.com/?size=100&id=NeNPFdj7MzXi&format=png&color=000000" },
-      ]
-    },
-    {
-      category: "Tools & Workflow",
-      skills: [
-        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-        { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
-        { name: "WordPress", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" },
-      ]
-    }
-  ];
 
   // Education Data
   const educationData = [
@@ -209,21 +181,7 @@ export default function Skills() {
     }
   };
 
-  const categoryVariants = {
-    hidden: { opacity: 0, x: -50, rotateY: -15 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      rotateY: 0,
-      transition: {
-        duration: 0.6,
-        type: "spring",
-        bounce: 0.3
-      }
-    }
-  };
-
-  const [prevTab, setPrevTab] = useState("skills");
+  const [prevTab, setPrevTab] = useState("experience");
   const [direction, setDirection] = useState(0); 
   const [bgStyle, setBgStyle] = useState({ left: 0, width: 0 });
   const tabRefs = useRef([]);
@@ -248,14 +206,12 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="relative py-10 sm:py-16 md:py-28 min-h-screen flex items-center bg-white dark:bg-[#0e0e13] overflow-hidden">
+    <section id="skills" className="relative py-10 sm:py-16 md:py-28 min-h-screen flex flex-col justify-center bg-white dark:bg-[#0e0e13] overflow-hidden">
       {/* Minimal Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Subtle gradient orb */}
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-gradient-to-r from-indigo-600/5 to-purple-600/5 dark:from-indigo-600/3 dark:to-purple-600/3 rounded-full filter blur-3xl" />
       </div>
-
-      {/* Removed mouse follower for minimal design */}
     
       <div className="container mx-auto px-2 sm:px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -290,7 +246,34 @@ export default function Skills() {
           </motion.p>
         </motion.div>
 
-        {/* Enhanced Tabs Navigation */}
+        {/* Horizontal Scrolling Skills Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mb-12 sm:mb-16"
+        >
+          <motion.div
+            className="text-center mb-8"
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <motion.h3 
+              className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4"
+              animate={{
+                scale: [1, 1.02, 1],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              Technical Skills
+            </motion.h3>
+            
+          </motion.div>
+          <ScrollingSkills />
+        </motion.div>
+
+        {/* Enhanced Tabs Navigation for Education & Experience */}
         <div className="flex justify-center mb-6 sm:mb-12">
           <motion.div 
             className="relative bg-white/80 dark:bg-[#181926]/80 backdrop-blur-md rounded-full p-1 border border-gray-200 dark:border-gray-700 shadow-xl"
@@ -343,70 +326,8 @@ export default function Skills() {
           </motion.div>
         </div>
 
-        {/* Skills Tab Content */}
+        {/* Education & Experience Tab Content */}
         <AnimatePresence mode="wait">
-          {activeTab === "skills" && (
-            <motion.div
-              key="skills"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="max-w-6xl mx-auto p-2 sm:p-4 md:p-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                  {technicalSkills.map((category, idx) => (
-                    <div
-                      key={category.category}
-                      className={
-                        `rounded-2xl p-4 sm:p-6 h-full flex flex-col bg-white dark:bg-gray-900/40 border ` +
-                        (idx === 0 ? 'border-pink-200 dark:border-pink-400/40' : idx === 1 ? 'border-indigo-200 dark:border-indigo-400/40' : 'border-purple-200 dark:border-purple-400/40')
-                      }
-                    >
-                      <div className={
-                        `text-base sm:text-lg font-bold mb-2 sm:mb-4 ` +
-                        (idx === 0 ? 'text-pink-600 dark:text-pink-400' : idx === 1 ? 'text-indigo-600 dark:text-indigo-400' : 'text-purple-600 dark:text-purple-400')
-                      }>
-                        {category.category}
-                      </div>
-                      <div className="divide-y divide-gray-200 dark:divide-white/10">
-                        <motion.div
-                          variants={containerVariants}
-                          initial="hidden"
-                          animate="visible"
-                        >
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-                            {category.skills.map((skill) => (
-                              <motion.div
-                                key={skill.name}
-                                variants={itemVariants}
-                                className="flex flex-col items-center justify-center text-center bg-gray-50 dark:bg-gray-800/40 rounded-xl p-3 sm:p-4 shadow-sm cursor-pointer transition-all duration-300 hover:bg-gray-100 dark:hover:bg-gray-700/60 hover:shadow-md hover:-translate-y-1 hover:scale-105"
-                                whileHover={{ 
-                                  scale: 1.05,
-                                  y: -4,
-                                  transition: { duration: 0.2 }
-                                }}
-                                whileTap={{ scale: 0.98 }}
-                              >
-                                <div className={
-                                  `w-12 h-12 flex items-center justify-center rounded-xl mb-2 ` +
-                                  (idx === 0 ? 'bg-pink-100 dark:bg-pink-600/10' : idx === 1 ? 'bg-indigo-100 dark:bg-indigo-600/10' : 'bg-purple-100 dark:bg-purple-600/10')
-                                }>
-                                  <img src={skill.icon} alt={skill.name} className="w-8 h-8 object-contain" />
-                                </div>
-                                <div className="font-bold text-gray-900 dark:text-white text-xs sm:text-sm mt-1">{skill.name}</div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </motion.div>
-                      </div>
-                    </div>
-                    ))}
-                  </div>
-                </div>
-            </motion.div>
-          )}
-
           {activeTab === "education" && (
             <motion.div
               key="education"
