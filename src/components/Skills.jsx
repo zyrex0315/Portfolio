@@ -117,7 +117,7 @@ export default function Skills() {
       period: "2021 - Present",
       description: "Currently pursuing a comprehensive degree in computer and information systems, focusing on modern software development, database management, and information technology fundamentals.",
       courses: ["Programming Fundamentals", "Database Management", "Information Systems", "Web Development"],
-      logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp7Asp5s-ZFrUhtQXgjXB5f7sSCyBRKb9rkA&s"
+      logo: "https://result.cct.edu.np/images/logo.png"
     }
   ];
 
