@@ -40,12 +40,11 @@ export default function App() {
           <Contact />
         </main>
         <Footer />
-        {/* Only show blurred background in dark mode */}
+      
         <div className="dark:block hidden fixed top-0 left-0 w-full h-full pointer-events-none overflow-hidden z-[-1]">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-600/10 dark:bg-indigo-600/5 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-600/10 dark:bg-purple-600/5 rounded-full filter blur-3xl"></div>
         </div>
-        {/* Scroll to top button */}
         <ScrollToTopButton />
       </motion.div>
     </ClickSpark>
@@ -79,7 +78,7 @@ function ScrollToTopButton() {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
-          transition={{ duration: 0.3 }} // Use default transition
+          transition={{ duration: 0.3 }} 
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 focus:outline-none z-50"
           aria-label="Scroll to top"
