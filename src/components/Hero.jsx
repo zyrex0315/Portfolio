@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, memo, useMemo, useCallback } from 'react';
 import { motion, useScroll, useTransform, useInView, useReducedMotion } from 'framer-motion';
 import Background from './Background';
 
-// Optimized animation variants with reduced complexity
 const containerVariants = {
   hidden: {},
   show: {
@@ -31,7 +30,6 @@ const fadeInVariant = {
   },
 };
 
-// Optimized typewriter with better performance
 const TypewriterText = memo(({ text, delay = 0, className = "", onComplete }) => {
   const [displayText, setDisplayText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
@@ -88,7 +86,6 @@ const TypewriterText = memo(({ text, delay = 0, className = "", onComplete }) =>
 
 TypewriterText.displayName = 'TypewriterText';
 
-// Simplified gradient text with better performance
 const GradientHighlightText = memo(({ children, delay = 0 }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
   const prefersReducedMotion = useReducedMotion();
@@ -126,7 +123,6 @@ const GradientHighlightText = memo(({ children, delay = 0 }) => {
         {children}
       </motion.span>
       
-      {/* Simplified glow effect - only show on larger screens */}
       <motion.div
         className="hidden md:block absolute inset-0 bg-gradient-to-r from-indigo-600/20 via-purple-600/20 to-indigo-600/20 rounded-lg blur-lg"
         initial={{ opacity: 0 }}
@@ -145,7 +141,6 @@ const GradientHighlightText = memo(({ children, delay = 0 }) => {
 
 GradientHighlightText.displayName = 'GradientHighlightText';
 
-// Enhanced word reveal with letter-by-letter animation
 const WordReveal = memo(({ text, delay = 0, className = "" }) => {
   const words = text.split(' ');
   const prefersReducedMotion = useReducedMotion();
@@ -184,7 +179,6 @@ const WordReveal = memo(({ text, delay = 0, className = "" }) => {
 
 WordReveal.displayName = 'WordReveal';
 
-// Enhanced description animation with staggered word reveals
 const DescriptionReveal = memo(({ text, delay = 0, className = "", isVisible = true }) => {
   const words = text.split(' ');
   const prefersReducedMotion = useReducedMotion();
@@ -216,7 +210,6 @@ const DescriptionReveal = memo(({ text, delay = 0, className = "", isVisible = t
 
 DescriptionReveal.displayName = 'DescriptionReveal';
 
-// Optimized social icon component
 const SocialIcon = memo(({ type }) => {
   const iconPaths = {
     github: "M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z",
@@ -235,7 +228,6 @@ const SocialIcon = memo(({ type }) => {
 
 SocialIcon.displayName = 'SocialIcon';
 
-// Main optimized hero component
 export default function OptimizedHero() {
   const containerRef = useRef(null);
   const textRef = useRef(null);
@@ -248,7 +240,6 @@ export default function OptimizedHero() {
   
   const isInView = useInView(textRef, { once: false, amount: 0.3 });
   
-  // Optimized scroll transforms
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.98]);
@@ -258,7 +249,6 @@ export default function OptimizedHero() {
   const [showMainHeading, setShowMainHeading] = useState(false);
   const [showDescription, setShowDescription] = useState(false);
 
-  // Optimized dark mode detection
   useEffect(() => {
     const checkDark = () => setIsDarkMode(document.documentElement.classList.contains('dark'));
     checkDark();
@@ -269,10 +259,8 @@ export default function OptimizedHero() {
     return () => observer.disconnect();
   }, []);
 
-  // Optimized animation timing with re-trigger capability
   useEffect(() => {
     if (isInView) {
-      // When in view, start the animations
       const timer1 = setTimeout(() => setShowTypewriter(true), prefersReducedMotion ? 0 : 400);
       const timer2 = setTimeout(() => setShowMainHeading(true), prefersReducedMotion ? 0 : 1200);
       const timer3 = setTimeout(() => setShowDescription(true), prefersReducedMotion ? 0 : 1800);
@@ -282,7 +270,6 @@ export default function OptimizedHero() {
         clearTimeout(timer3);
       };
     } else {
-      // When out of view, reset the states to allow re-triggering
       setShowTypewriter(false);
       setShowMainHeading(false);
       setShowDescription(false);
@@ -316,7 +303,6 @@ export default function OptimizedHero() {
       ref={containerRef}
     >
       
-      {/* Optimized background - only show on desktop and when dark mode is active */}
       {isDarkMode && !prefersReducedMotion && (
         <motion.div 
           className="hidden lg:block absolute inset-0 z-0"
@@ -328,7 +314,6 @@ export default function OptimizedHero() {
         </motion.div>
       )}
 
-      {/* Simplified bottom fade gradient */}
       <div className="hidden lg:dark:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0e0e13] via-[#0e0e13]/80 to-transparent z-10" />
 
       <motion.div
@@ -339,10 +324,8 @@ export default function OptimizedHero() {
         animate="show"
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left: Text Content */}
           <div className="order-2 lg:order-1" ref={textRef}>
             <motion.div variants={containerVariants}>
-              {/* Typewriter greeting */}
               <motion.div
                 className="mb-4"
                 variants={fadeUpVariant}
@@ -357,7 +340,6 @@ export default function OptimizedHero() {
                 )}
               </motion.div>
 
-              {/* Enhanced main heading with letter-by-letter reveal */}
               <motion.h1
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight mb-6"
                 variants={fadeUpVariant}
@@ -404,7 +386,6 @@ export default function OptimizedHero() {
                 )}
               </motion.h1>
 
-              {/* Enhanced Description with word-by-word reveal */}
               {showDescription && (
                 <DescriptionReveal
                   text="I create beautiful, responsive, and user-friendly web experiences with clean code and modern technologies that bring your vision to life."
@@ -414,7 +395,6 @@ export default function OptimizedHero() {
                 />
               )}
 
-              {/* Optimized buttons */}
               <motion.div
                 className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4"
                 variants={fadeUpVariant}
@@ -463,7 +443,6 @@ export default function OptimizedHero() {
                 </motion.button>
               </motion.div>
 
-              {/* Optimized social links */}
               <motion.div
                 className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-8"
                 variants={fadeInVariant}
@@ -502,7 +481,6 @@ export default function OptimizedHero() {
                 </div>
               </motion.div>
 
-              {/* Optimized mobile scroll indicator */}
               <motion.div
                 className="w-full flex flex-col items-center justify-center mt-8 sm:mt-12 lg:hidden"
                 initial={{ opacity: 0, y: 20 }}
@@ -532,7 +510,6 @@ export default function OptimizedHero() {
             </motion.div>
           </div>
 
-          {/* Right: Optimized Image Content */}
           <motion.div
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
             initial={{ opacity: 0, scale: 0.95 }}
@@ -541,7 +518,6 @@ export default function OptimizedHero() {
             style={{ willChange: prefersReducedMotion ? 'auto' : 'transform' }}
           >
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96">
-              {/* Simplified background elements for better performance */}
               {!prefersReducedMotion && (
                 <>
                   <motion.div
@@ -559,7 +535,6 @@ export default function OptimizedHero() {
                 </>
               )}
               
-              {/* Main image container with simplified effects */}
               <motion.div 
                 className="relative overflow-hidden rounded-full border-4 border-white/20 dark:border-gray-800/50 shadow-2xl backdrop-blur-sm w-full h-full"
                 whileHover={prefersReducedMotion ? {} : { 
@@ -590,7 +565,6 @@ export default function OptimizedHero() {
         </div>
       </motion.div>
 
-      {/* Optimized desktop scroll indicator */}
       <motion.div
         className="hidden lg:flex flex-col items-center absolute left-1/2 transform -translate-x-1/2 bottom-8 z-20"
         initial={{ opacity: 0, y: 20 }}
