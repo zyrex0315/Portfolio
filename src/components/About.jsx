@@ -9,7 +9,6 @@ export default function About() {
     amount: 0.1,
   });
 
-  // Optimized animation variants with reduced complexity
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -43,7 +42,6 @@ export default function About() {
     }
   };
 
-  // Optimized WordReveal component
   const WordReveal = React.memo(({ text, className, delay = 0 }) => (
     <motion.div 
       className={className}
@@ -73,7 +71,6 @@ export default function About() {
     </motion.div>
   ));
 
-  // Optimized AnimatedText component
   const AnimatedText = React.memo(({ text, className, delay = 0 }) => (
     <motion.div
       className={className}
@@ -114,7 +111,6 @@ export default function About() {
     </motion.div>
   ));
 
-  // Skill item component for better performance
   const SkillItem = React.memo(({ skill, index, delay, gradient }) => (
     <motion.div
       className="flex items-center cursor-pointer group"
@@ -202,7 +198,6 @@ export default function About() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {/* Image Section */}
           <motion.div
             variants={itemVariants}
             className="w-full lg:w-2/5 relative"
@@ -218,7 +213,6 @@ export default function About() {
                 whileHover={{ scale: 1.02 }}
               />
               
-              {/* Decorative corner elements */}
               <motion.div
                 className="absolute top-4 left-4 w-16 h-16 border-t-3 border-l-3 border-indigo-500/60"
                 initial={{ scale: 0, rotate: -90 }}
@@ -236,7 +230,6 @@ export default function About() {
             </div>
           </motion.div>
 
-          {/* Content Section */}
           <motion.div
             variants={itemVariants}
             className="w-full lg:w-3/5"
@@ -267,7 +260,6 @@ export default function About() {
               </motion.div>
             </div>
 
-            {/* Skills and Tools Section */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <motion.div variants={itemVariants}>
                 <div className="flex items-center mb-6">
