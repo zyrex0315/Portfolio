@@ -22,10 +22,8 @@ export default function Header() {
   const [lastScrollY, setLastScrollY] = useState(0);
  
 
-  // Detect mobile view
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
-  // Set initial active link based on current scroll position
   useEffect(() => {
     const currentScrollY = window.scrollY;
     if (currentScrollY < 100) {
@@ -37,7 +35,6 @@ export default function Header() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Determine scroll direction
       if (currentScrollY > lastScrollY && !mobileMenuOpen) {
         setScrollDirection("down");
       } else {
@@ -45,13 +42,11 @@ export default function Header() {
       }
       setLastScrollY(currentScrollY);
       
-      // Check if scrolled more than threshold
       const isScrolled = currentScrollY > 10;
       if (isScrolled !== scrolled) {
         setScrolled(isScrolled);
       }
       
-      // Update active link based on scroll position
       const sections = document.querySelectorAll('section[id]');
       let current = '';
       
@@ -158,7 +153,6 @@ export default function Header() {
             </a>
           </motion.div>
 
-          {/* Desktop Navigation */}
           <motion.nav 
             className="hidden md:flex items-center"
             {...(!isMobile
@@ -226,7 +220,6 @@ export default function Header() {
               </AnimatePresence>
             </motion.button>
 
-            {/* Mobile menu button */}
             <motion.button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="p-3 rounded-full md:hidden bg-white dark:bg-gray-800 text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 transition-colors shadow-md hover:shadow-lg"
@@ -264,7 +257,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.nav 
